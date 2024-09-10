@@ -26,9 +26,8 @@
         {{greeting}}
         <input v-model="greeting"/>
         <hr/>
+        <button v-on:click="inVisible = true">show box</button>
         <div v-if="inVisible" class="box"></div> <!-- if the v-if is set to true in the below app config the vue renders it-->
-        <div v-else-if="inVisible2" class="box two"></div> <!--same as else if statement-->
-        <div v-else class="box three"></div>
     </div>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>

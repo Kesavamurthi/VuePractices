@@ -19,14 +19,17 @@
         [v-cloak]{  /* the v-cloak removes the rendering the whole page while loading*/
             display: none;
         }
+        input{
+            margin: 10px;
+            display: block;
+        }
     </style>
 </head>
 <body>
     <div id="app" v-cloak>
-        {{greeting}}
-        <input v-model="greeting"/>
+        <custom-form />
         <hr/>
-        <button v-on:click="inVisible = true">show box</button>
+        <button @click="toggleBox">show box</button>
         <div v-if="inVisible" class="box"></div> <!-- if the v-if is set to true in the below app config the vue renders it-->
     </div>
 
@@ -37,10 +40,41 @@
                 return {
                     greeting: 'hello vue 5', <!--these keys value names are searched at the dom and rendered-->
                     inVisible: false,
-                    inVisible2: false
+                }
+            },
+            methods:{
+                 toggleBox(){
+                    this.inVisible = !this.inVisible
+                 },
+                 greet(){
+                    console.log('hello');
+                 }
+            }
+        })
+
+        app.component('custom-form',{
+            template:`
+                <form @submit.prevent="handleSubmit"> 
+                    <h1>{{title}}</h1>
+                    <input type="email" v-model="email">
+                    <input type="password" v-model="password">
+                    <button>submit</submit>
+                </form>
+            `,
+            data(){
+                return {
+                    title: 'login form',
+                    email:'',
+                    password:''
+                }
+            },
+            methods:{
+                handleSubmit(){
+                    console.log(this.email,this.password)
                 }
             }
         })
+    
         app.mount('#app');
     </script>
 </body>

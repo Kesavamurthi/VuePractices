@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            background-color: purple;
+            height: 200px;
+            width: 200px;
+        }
+        .box.two{
+            background-color: red;
+        }
+        .box.three{
+            background-color: blue;
+        }
+        [v-cloak]{  /* the v-cloak removes the rendering the whole page while loading*/
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        {{greeting}}
+        <input v-model="greeting"/>
+        <hr/>
+        <div v-if="inVisible" class="box"></div> <!-- if the v-if is set to true in the below app config the vue renders it-->
+        <div v-else-if="inVisible2" class="box two"></div> <!--same as else if statement-->
+        <div v-else class="box three"></div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        let app = Vue.createApp({
+            data: function(){
+                return {
+                    greeting: 'hello vue 5', <!--these keys value names are searched at the dom and rendered-->
+                    inVisible: false,
+                    inVisible2: false
+                }
+            }
+        })
+        app.mount('#app');
+    </script>
+</body>
+</html>
